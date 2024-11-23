@@ -4,6 +4,7 @@
   "description": "rest api nutech",
   "main": "index.js",
   "scripts": {
+    "start": "src/server.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon"
   },
