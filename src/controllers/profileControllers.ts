@@ -8,7 +8,12 @@ interface CustomJwtPayload extends Request {
 
 // fungsi untuk get user
 export const getUserProfile = async (req: Request, res: Response) => {
-  const user = await prisma.user.findMany({
+  const token = req.headers.authorization?.split(" ")[1]!;
+  const JWT_SECRET = process.env.JWT_SECRET!;
+  const decoded = jwt.verify(token, JWT_SECRET) as CustomJwtPayload;
+  const email = decoded.email;
+  const user = await prisma.user.findUnique({
+    where: { email },
     select: {
       email: true,
       first_name: true,
